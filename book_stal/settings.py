@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,7 +80,21 @@ TEMPLATES = [
     },
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 WSGI_APPLICATION = 'book_stal.wsgi.application'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {
+            "location": BASE_DIR / "media",
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # Database
